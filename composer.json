@@ -1,0 +1,26 @@
+{
+    "name": "cs278/mktemp",
+    "description": "Create temporary files and directories using PHP safely.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Smith",
+            "email": "chris@cs278.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Cs278\\Mktemp\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^5.3.3 | ^7.0.0"
+    },
+    "require-dev": {
+        "cs278/coding-standard": "^1.0.0"
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix"
+    }
+}
