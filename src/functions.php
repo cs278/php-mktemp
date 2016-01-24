@@ -82,6 +82,10 @@ function pathTemplate($template)
         $useRandomInt = function_exists('random_int');
     }
 
+    if (false !== strpos($template, '\\') || false !== strpos($template, '/')) {
+        throw new \InvalidArgumentException('Template must not contain back or forward slashes');
+    }
+
     $len = 0;
 
     if (false !== $pos = strrpos($template, 'X')) {
