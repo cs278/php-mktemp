@@ -20,7 +20,8 @@ Usage
   The directory should be a path that exists and the user can write to, if this
   argument is not supplied the default temporary directory will be used.
 
-  A `\RuntimeException` will be thrown if a file cannot be created.
+  A `Cs278\Mktemp\Exception\CreateFailedException` will be thrown if a file
+  cannot be created.
 
   ```php
   use Cs278\Mktemp\temporaryFile;
@@ -46,7 +47,8 @@ Usage
   The directory should be a path that exists and the user can write to, if this
   argument is not supplied the default temporary directory will be used.
 
-  A `\RuntimeException` will be thrown if a file cannot be created.
+  A `Cs278\Mktemp\Exception\CreateFailedException` will be thrown if a directory
+  cannot be created.
 
   ```php
   use Cs278\Mktemp\temporaryDir;

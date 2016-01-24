@@ -2,6 +2,8 @@
 
 namespace Cs278\Mktemp;
 
+use Cs278\Mktemp\Exception\CreateFailedException;
+
 /**
  * Create a temporary file and return the path.
  *
@@ -34,10 +36,7 @@ function temporaryFile($template = null, $dir = null)
         }
     } while (0 < --$attempts);
 
-    throw new \RuntimeException(sprintf(
-        'Failed to create temporary file in `%s`',
-        rtrim($dir ?: 'cwd: '.getcwd(), '/')
-    ));
+    throw CreateFailedException::failedFile($dir);
 }
 
 /**
@@ -67,10 +66,7 @@ function temporaryDir($template = null, $dir = null)
         }
     } while (0 < --$attempts);
 
-    throw new \RuntimeException(sprintf(
-        'Failed to create temporary directory in `%s`',
-        rtrim($dir ?: 'cwd: '.getcwd(), '/')
-    ));
+    throw CreateFailedException::failedDir($dir);
 }
 
 /**
