@@ -24,7 +24,7 @@ Usage
   cannot be created.
 
   ```php
-  use Cs278\Mktemp\temporaryFile;
+  use function Cs278\Mktemp\temporaryFile;
 
   var_dump(temporaryFile());
   // /tmp/tmp.P9aLnd
@@ -51,7 +51,7 @@ Usage
   cannot be created.
 
   ```php
-  use Cs278\Mktemp\temporaryDir;
+  use function Cs278\Mktemp\temporaryDir;
 
   var_dump(temporaryDir());
   // /tmp/tmp.P9aLnd
