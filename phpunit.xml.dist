@@ -15,6 +15,7 @@
         <testsuite name="Test Suite">
             <file>./tests/functional/TemporaryDirFunctionTest.php</file>
             <file>./tests/functional/TemporaryFileFunctionTest.php</file>
+            <file>./tests/functional/TempFileTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
