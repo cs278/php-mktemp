@@ -13,7 +13,7 @@ namespace Cs278\Mktemp;
  *
  * @return string Path to temporary file
  */
-function file($template = null, $dir = null)
+function temporaryFile($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
@@ -51,7 +51,7 @@ function file($template = null, $dir = null)
  *
  * @return string Path to temporary directory
  */
-function dir($template = null, $dir = null)
+function temporaryDir($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();

@@ -13,8 +13,8 @@
 >
     <testsuites>
         <testsuite name="Test Suite">
-            <file>./tests/functional/Dir.php</file>
-            <file>./tests/functional/File.php</file>
+            <file>./tests/functional/TemporaryDirFunctionTest.php</file>
+            <file>./tests/functional/TemporaryFileFunctionTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

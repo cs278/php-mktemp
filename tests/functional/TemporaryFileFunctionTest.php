@@ -4,35 +4,35 @@ namespace Cs278\Mktemp\Tests;
 
 use Cs278\Mktemp;
 
-class Dir extends \PHPUnit_Framework_TestCase
+class TemporaryFileFunctionTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateWithDefaults()
     {
-        $path = Mktemp\dir();
+        $path = Mktemp\temporaryFile();
 
         $this->assertRegExp('{^tmp\.[A-Za-z0-9]{6}$}', basename($path));
         $this->assertSame(sys_get_temp_dir(), dirname($path));
 
-        $this->assertTrue(is_dir($path));
+        $this->assertTrue(is_file($path));
         $this->assertTrue(is_readable($path));
         $this->assertTrue(is_writable($path));
-        $this->assertTrue(is_executable($path));
+        $this->assertFalse(is_executable($path));
 
-        rmdir($path);
+        unlink($path);
     }
 
     public function testCreateWithTemplate()
     {
-        $path = Mktemp\dir('someXXXdir.XXX');
+        $path = Mktemp\temporaryFile('outXXXput.XXX.pdf');
 
-        $this->assertRegExp('{^someXXXdir\.[A-Za-z0-9]{3}$}', basename($path));
+        $this->assertRegExp('{^outXXXput\.[A-Za-z0-9]{3}\.pdf$}', basename($path));
         $this->assertSame(sys_get_temp_dir(), dirname($path));
 
-        $this->assertTrue(is_dir($path));
+        $this->assertTrue(is_file($path));
         $this->assertTrue(is_readable($path));
         $this->assertTrue(is_writable($path));
-        $this->assertTrue(is_executable($path));
+        $this->assertFalse(is_executable($path));
 
-        rmdir($path);
+        unlink($path);
     }
 }
