@@ -18,7 +18,7 @@
         }
     },
     "require": {
-        "php": "^5.3.3 | ^7.0.0"
+        "php": "^5.3.3 || ^7 || ^8"
     },
     "require-dev": {
         "cs278/coding-standard": "^1.0.0",
