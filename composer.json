@@ -21,7 +21,7 @@
         "php": "^5.3.3 || ^7 || ^8"
     },
     "require-dev": {
-        "cs278/coding-standard": "^1.0.0",
+        "cs278/coding-standard": "^2",
         "phpunit/phpunit": "^4.8.21"
     },
     "scripts": {
