@@ -2,19 +2,23 @@
 
 namespace Cs278\Mktemp\Tests;
 
-use Cs278\Mktemp\TempFile;
 use Cs278\Mktemp;
+use Cs278\Mktemp\TempFile;
+use PHPUnit\Framework\TestCase;
+use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
-final class TempFileTest extends \PHPUnit_Framework_TestCase
+final class TempFileTest extends TestCase
 {
+    use SetUpTearDownTrait;
+
     private $tmpdir;
 
-    public function setUp()
+    public function doSetUp()
     {
         $this->tmpdir = Mktemp\temporaryDir();
     }
 
-    public function tearDown()
+    public function doTearDown()
     {
         foreach (glob($this->tmpdir.'/*') as $file) {
             unlink($file);
@@ -86,7 +90,7 @@ final class TempFileTest extends \PHPUnit_Framework_TestCase
         $file = $this->createTempFile();
         $file->open()->fwrite('Hello World!');
 
-        $targetStream = fopen('php://memory', 'r+');
+        $targetStream = fopen('php://memory', 'r+b');
 
         $this->assertNull($file->copyTo($targetStream));
 

@@ -27,7 +27,7 @@ function temporaryFile($template = null, $dir = null)
 
         if (false !== $handle = @fopen($path, 'xb')) {
             if ('\\' !== \DIRECTORY_SEPARATOR) {
-                @chmod(0600 & ~umask());
+                @chmod($path, 0600 & ~umask());
             }
 
             fclose($handle);
@@ -79,7 +79,7 @@ function pathTemplate($template)
 
     if (!$alphabet) {
         $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $useRandomInt = function_exists('random_int');
+        $useRandomInt = \function_exists('random_int');
     }
 
     if (false !== strpos($template, '\\') || false !== strpos($template, '/')) {

@@ -111,7 +111,7 @@ final class TempFile
     private function assertNotReleased()
     {
         if ($this->released) {
-            throw new \RuntimeException;
+            throw new \RuntimeException();
         }
     }
 
