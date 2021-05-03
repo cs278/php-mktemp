@@ -3,8 +3,9 @@
 namespace Cs278\Mktemp\Tests;
 
 use Cs278\Mktemp;
+use PHPUnit\Framework\TestCase;
 
-class TemporaryDirFunctionTest extends \PHPUnit_Framework_TestCase
+final class TemporaryDirFunctionTest extends TestCase
 {
     public function testCreateWithDefaults()
     {

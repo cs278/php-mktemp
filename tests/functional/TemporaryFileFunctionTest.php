@@ -3,8 +3,9 @@
 namespace Cs278\Mktemp\Tests;
 
 use Cs278\Mktemp;
+use PHPUnit\Framework\TestCase;
 
-class TemporaryFileFunctionTest extends \PHPUnit_Framework_TestCase
+final class TemporaryFileFunctionTest extends TestCase
 {
     public function testCreateWithDefaults()
     {

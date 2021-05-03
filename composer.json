@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "cs278/coding-standard": "^2",
-        "phpunit/phpunit": "^4.8.21"
+        "symfony/phpunit-bridge": "^5.2"
     },
     "scripts": {
         "cs": "php-cs-fixer fix"

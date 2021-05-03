@@ -40,5 +40,5 @@ jobs:
           composer install --prefer-source
       - name: PHPUnit
         run: |
-          vendor/bin/phpunit --version | head -n1 >&2
-          vendor/bin/phpunit --verbose
+          vendor/bin/simple-phpunit --version | head -n1 >&2
+          vendor/bin/simple-phpunit --verbose
