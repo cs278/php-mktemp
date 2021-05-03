@@ -42,7 +42,7 @@ jobs:
         run: |
           composer bin cs update
           composer cs
-        if: ${{ matrix.php }} != "5.6"
+        if: "false"
       - name: PHPUnit
         run: |
           vendor/bin/simple-phpunit --version | head -n1 >&2
