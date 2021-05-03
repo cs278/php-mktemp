@@ -37,7 +37,7 @@ jobs:
         run: echo 'zend.assertions=1' | sudo tee /etc/php/${{ matrix.php }}/cli/conf.d/assert.ini >/dev/null
       - name: Install dependencies
         run: |
-          composer install --prefer-source
+          composer update
       - name: PHPUnit
         run: |
           vendor/bin/simple-phpunit --version | head -n1 >&2
