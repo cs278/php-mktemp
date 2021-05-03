@@ -79,7 +79,7 @@ function pathTemplate($template)
 
     if (!$alphabet) {
         $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $useRandomInt = function_exists('random_int');
+        $useRandomInt = \function_exists('random_int');
     }
 
     if (false !== strpos($template, '\\') || false !== strpos($template, '/')) {
