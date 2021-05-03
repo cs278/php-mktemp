@@ -38,6 +38,11 @@ jobs:
       - name: Install dependencies
         run: |
           composer update
+      - name: Coding Standards
+        run: |
+          composer bin cs update
+          composer cs
+        if: ${{ matrix.php }} != "5.6"
       - name: PHPUnit
         run: |
           vendor/bin/simple-phpunit --version | head -n1 >&2
