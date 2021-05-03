@@ -27,7 +27,7 @@ function temporaryFile($template = null, $dir = null)
 
         if (false !== $handle = @fopen($path, 'xb')) {
             if ('\\' !== \DIRECTORY_SEPARATOR) {
-                @chmod(0600 & ~umask());
+                @chmod($path, 0600 & ~umask());
             }
 
             fclose($handle);
