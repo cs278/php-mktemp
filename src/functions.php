@@ -19,7 +19,7 @@ function temporaryFile($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
-    $dir = $dir ? $dir.'/' : '';
+    $dir = $dir ? $dir. DIRECTORY_SEPARATOR : '';
     $attempts = 5;
 
     do {
@@ -54,7 +54,7 @@ function temporaryDir($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
-    $dir = $dir ? $dir.'/' : '';
+    $dir = $dir ? $dir. DIRECTORY_SEPARATOR : '';
     $attempts = 5;
 
     do {
