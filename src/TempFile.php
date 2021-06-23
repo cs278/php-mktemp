@@ -102,8 +102,26 @@ final class TempFile
     public function release()
     {
         if (!$this->released) {
-            unlink($this->path);
+            if (\PHP_VERSION_ID < 70300 && \DIRECTORY_SEPARATOR === '\\') {
+                // Handle Windows pre PHP 7.3.x which cannot handle unlinking paths
+                // where the file handle is still in use. I believe this can happen
+                // because PHP does not necessarily garbage collect objects in the
+                // correct order. So sometimes on Windows and PHP 7.2 the unlink
+                // can fail, this works around that by delaying the unlink until
+                // PHP shuts down.
+                // https://www.php.net/manual/en/function.unlink.php#refsect1-function.unlink-changelog
+               $result = @unlink($this->path);
 
+                if (!$result) {
+                    $path = $this->path;
+
+                    \register_shutdown_function(function () use ($path) {
+                        @unlink($path);
+                    });
+                }
+            } else {
+                unlink($this->path);
+            }
             $this->released = true;
         }
     }
