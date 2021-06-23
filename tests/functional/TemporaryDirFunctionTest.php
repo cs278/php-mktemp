@@ -17,7 +17,10 @@ final class TemporaryDirFunctionTest extends TestCase
         $this->assertTrue(is_dir($path));
         $this->assertTrue(is_readable($path));
         $this->assertTrue(is_writable($path));
-        $this->assertTrue(is_executable($path));
+
+        if (\DIRECTORY_SEPARATOR === '/') {
+            $this->assertTrue(is_executable($path));
+        }
 
         rmdir($path);
     }
@@ -32,7 +35,10 @@ final class TemporaryDirFunctionTest extends TestCase
         $this->assertTrue(is_dir($path));
         $this->assertTrue(is_readable($path));
         $this->assertTrue(is_writable($path));
-        $this->assertTrue(is_executable($path));
+
+        if (\DIRECTORY_SEPARATOR === '/') {
+            $this->assertTrue(is_executable($path));
+        }
 
         rmdir($path);
     }
