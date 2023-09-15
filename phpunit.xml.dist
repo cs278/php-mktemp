@@ -11,7 +11,11 @@
     bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="Test Suite">
+        <testsuite name="Unit">
+            <directory>tests/unit</directory>
+        </testsuite>
+
+        <testsuite name="Functional">
             <file>./tests/functional/TemporaryDirFunctionTest.php</file>
             <file>./tests/functional/TemporaryFileFunctionTest.php</file>
             <file>./tests/functional/TempFileTest.php</file>
