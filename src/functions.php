@@ -89,8 +89,8 @@ function pathTemplate($template)
     $len = 0;
     $requiredLen = 3;
 
-    if (false !== $pos = strrpos($template, 'X')) {
-        $len = 1;
+    if (false !== $pos = strrpos($template, str_repeat('X', $requiredLen))) {
+        $len = $requiredLen;
 
         while ($pos > 0) {
             if ('X' === $template[$pos - 1]) {

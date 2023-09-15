@@ -41,7 +41,7 @@ final class PathTemplateFunctionTest extends TestCase
     }
 
     /**
-     * @large
+     * @medium
      */
     public function testSlow()
     {
