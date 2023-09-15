@@ -35,7 +35,20 @@ final class PathTemplateFunctionTest extends TestCase
             ['foo_', 3, '', 'foo_XXX'],
             ['foo_', 31, '', 'foo_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'],
             ['XXX_', 3, '', 'XXX_XXX'],
+            ['foo-', 3, '-XX_XX_X_XX_X_XX_XX_X_X_X.tmp', 'foo-XXX-XX_XX_X_XX_X_XX_XX_X_X_X.tmp'],
+            ['foo-', 3, '-XX_XX_X_XX_X_XX_XX_X_X_X', 'foo-XXX-XX_XX_X_XX_X_XX_XX_X_X_X'],
         ];
+    }
+
+    /**
+     * @large
+     */
+    public function testSlow()
+    {
+        $result = pathTemplate('XXX'.\str_repeat('aXX', 1024 * 1024 * 100));
+
+        $this->assertEquals(1024 * 1024 * 100 * 3 + 3, strlen($result));
+        $this->assertRegExp('{^[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}a}', $result);
     }
 
     /** @dataProvider dataInvalid */
