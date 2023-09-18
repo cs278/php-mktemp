@@ -25,8 +25,8 @@ jobs:
       fail-fast: true
     name: PHP ${{ matrix.php }} (${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v2
-      - uses: shivammathur/setup-php@ed61605069a923e7d52acea0aef21650b029c727
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@7fdd3ece872ec7ec4c098ae5ab7637d5e0a96067
         with:
           php-version: ${{ matrix.php }}
       - name: Cache dependencies
