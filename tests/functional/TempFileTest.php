@@ -4,12 +4,12 @@ namespace Cs278\Mktemp\Tests;
 
 use Cs278\Mktemp;
 use Cs278\Mktemp\TempFile;
+use Cs278\Mktemp\Tests\TestCase\PHPUnitSetUpTearDownTrait;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 final class TempFileTest extends TestCase
 {
-    use SetUpTearDownTrait;
+    use PHPUnitSetUpTearDownTrait;
 
     private $tmpdir;
 
