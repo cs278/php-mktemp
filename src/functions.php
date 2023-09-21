@@ -87,17 +87,25 @@ function pathTemplate($template)
     }
 
     $len = 0;
+    $requiredLen = 3;
 
-    if (false !== $pos = strrpos($template, 'X')) {
-        $len = 1;
+    if (false !== $pos = strrpos($template, str_repeat('X', $requiredLen))) {
+        $len = $requiredLen;
 
-        while ($pos > 0 && 'X' === $template[$pos - 1]) {
+        while ($pos > 0) {
+            if ('X' === $template[$pos - 1]) {
+                ++$len;
+            } elseif ($len >= $requiredLen) {
+                break;
+            } else {
+                $len = 0;
+            }
+
             --$pos;
-            ++$len;
         }
     }
 
-    if (3 > $len) {
+    if ($requiredLen > $len) {
         throw new \InvalidArgumentException(sprintf(
             'Too few X\'s in template `%s`',
             $template

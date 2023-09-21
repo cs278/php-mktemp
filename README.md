@@ -15,9 +15,10 @@ Usage
 
   Create a temporary file with a supplied template for the name.
 
-  The template should be a string containing a sequence of 3 consecutive `X`
-  characters, these characters will be replaced with a random component. If this
-  argument is `null` a default `tmp.XXXXXX` template will be used.
+  The template should be a string containing a sequence of at *least* 3 consecutive
+  `X` characters, these characters will be replaced with a random component. The
+  last valid sequence in the string will be used. If this argument is `null` a
+  default `tmp.XXXXXX` template will be used.
 
   The directory should be a path that exists and the user can write to, if this
   argument is not supplied the default temporary directory will be used.
@@ -42,9 +43,10 @@ Usage
 
   Create a temporary directory with a supplied template for the name.
 
-  The template should be a string containing a sequence of 3 consecutive `X`
-  characters, these characters will be replaced with a random component. If this
-  argument is `null` a default `tmp.XXXXXX` template will be used.
+  The template should be a string containing a sequence of at *least* 3 consecutive
+  `X` characters, these characters will be replaced with a random component. The
+  last valid sequence in the string will be used. If this argument is `null` a
+  default `tmp.XXXXXX` template will be used.
 
   The directory should be a path that exists and the user can write to, if this
   argument is not supplied the default temporary directory will be used.
