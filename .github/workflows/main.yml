@@ -32,9 +32,6 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: zend.assertions=1
       - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - name: Install dependencies
-        run: |
-          composer update
       - name: PHPUnit
         run: |
           vendor/bin/phpunit --verbose
