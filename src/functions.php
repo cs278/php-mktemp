@@ -19,11 +19,11 @@ function temporaryFile($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
-    $dir = $dir ? $dir. DIRECTORY_SEPARATOR : '';
+    $dir = $dir ? $dir . DIRECTORY_SEPARATOR : '';
     $attempts = 5;
 
     do {
-        $path = $dir.pathTemplate($template);
+        $path = $dir . pathTemplate($template);
 
         if (false !== $handle = @fopen($path, 'xb')) {
             if ('\\' !== \DIRECTORY_SEPARATOR) {
@@ -54,11 +54,11 @@ function temporaryDir($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
-    $dir = $dir ? $dir. DIRECTORY_SEPARATOR : '';
+    $dir = $dir ? $dir . DIRECTORY_SEPARATOR : '';
     $attempts = 5;
 
     do {
-        $path = $dir.pathTemplate($template);
+        $path = $dir . pathTemplate($template);
 
         // umask is applied by PHP
         if (false !== @mkdir($path, 0700)) {

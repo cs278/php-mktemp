@@ -17,7 +17,7 @@ final class TempFileTest extends TestCase
 
     protected function tearDown(): void
     {
-        foreach (glob($this->tmpdir.'/*') as $file) {
+        foreach (glob($this->tmpdir . '/*') as $file) {
             unlink($file);
         }
 
@@ -67,7 +67,7 @@ final class TempFileTest extends TestCase
 
     public function testKeep()
     {
-        $newPath = $this->tmpdir.'/important-file';
+        $newPath = $this->tmpdir . '/important-file';
 
         $this->assertFileDoesNotExist($newPath);
 

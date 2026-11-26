@@ -39,7 +39,7 @@ final class PathTemplateFunctionTest extends TestCase
             ['foo-', 3, '-XX_XX_X_XX_X_XX_XX_X_X_X', 'foo-XXX-XX_XX_X_XX_X_XX_XX_X_X_X'],
             'internal space' => ['my temp_', 6, '', 'my temp_XXXXXX'],
             'valid UTF-8 multibyte' => ['tëmp_日本語_', 6, '', 'tëmp_日本語_XXXXXX'],
-            'dots and dashes' => ['app-cache.v1_', 6, '', 'app-cache.v1_XXXXXX']
+            'dots and dashes' => ['app-cache.v1_', 6, '', 'app-cache.v1_XXXXXX'],
         ];
     }
 
@@ -48,7 +48,7 @@ final class PathTemplateFunctionTest extends TestCase
      */
     public function testSlow()
     {
-        $result = pathTemplate('XXX'.\str_repeat('aXX', 1024 * 1024 * 100));
+        $result = pathTemplate('XXX' . \str_repeat('aXX', 1024 * 1024 * 100));
 
         $this->assertEquals(1024 * 1024 * 100 * 3 + 3, strlen($result));
         $this->assertMatchesRegularExpression('{^[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}a}', $result);
