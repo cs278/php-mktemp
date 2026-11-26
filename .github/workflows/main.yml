@@ -29,12 +29,12 @@ jobs:
       fail-fast: true
     name: PHP ${{ matrix.php }} (${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@7fdd3ece872ec7ec4c098ae5ab7637d5e0a96067
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: ${{ matrix.php }}
       - name: Cache dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
