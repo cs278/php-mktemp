@@ -44,6 +44,8 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     if: ${{ github.event_name == 'pull_request' }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install PHP
         uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
