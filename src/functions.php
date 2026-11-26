@@ -71,15 +71,19 @@ function temporaryDir($template = null, $dir = null): string
 
 /**
  * @internal
+ *
+ * @param string $template
  */
 function pathTemplate($template): string
 {
+    /** @var non-empty-string */
     static $alphabet;
 
     if (!$alphabet) {
         $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $useRandomInt = \function_exists('random_int');
     }
+
+    \assert(strlen($alphabet) === 62);
 
     if (false !== strpos($template, '\\') || false !== strpos($template, '/')) {
         throw new \InvalidArgumentException('Template must not contain back or forward slashes');
@@ -106,10 +110,11 @@ function pathTemplate($template): string
         while ($pos > 0) {
             if ('X' === $template[$pos - 1]) {
                 ++$len;
-            } elseif ($len >= $requiredLen) {
-                break;
             } else {
-                $len = 0;
+                // @phpstan-ignore function.alreadyNarrowedType, greaterOrEqual.alwaysTrue (Its an assertion)
+                \assert($len >= $requiredLen);
+
+                break;
             }
 
             --$pos;

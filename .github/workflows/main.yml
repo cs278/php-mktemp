@@ -31,13 +31,39 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           ini-values: zend.assertions=1
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - name: Install dependencies
-        run: |
-          composer update
+      - name: Install library
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          composer-options: "--no-plugins"
       - name: PHPUnit
         run: |
           vendor/bin/phpunit --verbose
+
+  phpstan:
+    name: PHPStan (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '8.6'
+      - name: Install library
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          composer-options: "--no-plugins"
+      - name: Install PHPStan
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          working-directory: vendor-bin/phpstan
+      - name: PHPStan
+        run: |
+          composer phpstan -- --error-format=github
 
   backwards-compatibility-check:
     name: Backwards Compatibility Check
@@ -52,9 +78,12 @@ jobs:
         uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: "8.5"
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+      - name: Install library
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          composer-options: "--no-plugins"
       - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
         with:
-          working-directory: vendor-bin/cs
+          working-directory: vendor-bin/bc-check
       - name: Check for BC breaks
         run: "composer bc-check -- --format=github-actions"

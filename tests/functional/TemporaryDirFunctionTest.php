@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TemporaryDirFunctionTest extends TestCase
 {
-    public function testCreateWithDefaults()
+    public function testCreateWithDefaults(): void
     {
         $path = Mktemp\temporaryDir();
 
@@ -25,7 +25,7 @@ final class TemporaryDirFunctionTest extends TestCase
         rmdir($path);
     }
 
-    public function testCreateWithTemplate()
+    public function testCreateWithTemplate(): void
     {
         $path = Mktemp\temporaryDir('someXXXdir.XXX');
 

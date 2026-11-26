@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TemporaryFileFunctionTest extends TestCase
 {
-    public function testCreateWithDefaults()
+    public function testCreateWithDefaults(): void
     {
         $path = Mktemp\temporaryFile();
 
@@ -22,7 +22,7 @@ final class TemporaryFileFunctionTest extends TestCase
         unlink($path);
     }
 
-    public function testCreateWithTemplate()
+    public function testCreateWithTemplate(): void
     {
         $path = Mktemp\temporaryFile('outXXXput.XXX.pdf');
 

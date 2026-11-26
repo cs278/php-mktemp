@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TempFileTest extends TestCase
 {
-    private $tmpdir;
+    private string $tmpdir;
 
     protected function setUp(): void
     {
@@ -17,14 +17,14 @@ final class TempFileTest extends TestCase
 
     protected function tearDown(): void
     {
-        foreach (glob($this->tmpdir . '/*') as $file) {
+        foreach (glob($this->tmpdir . '/*') ?: [] as $file) {
             unlink($file);
         }
 
         rmdir($this->tmpdir);
     }
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $file = $this->createTempFile();
         $path = $file->open('r')->getRealPath();
@@ -34,7 +34,7 @@ final class TempFileTest extends TestCase
         $this->assertSame(0, filesize($path));
     }
 
-    public function testDestructor()
+    public function testDestructor(): void
     {
         $file = $this->createTempFile();
         $path = $file->open('r')->getRealPath();
@@ -45,7 +45,7 @@ final class TempFileTest extends TestCase
         $this->assertFileDoesNotExist($path);
     }
 
-    public function testGetPath()
+    public function testGetPath(): void
     {
         $file = $this->createTempFile();
 
@@ -53,7 +53,7 @@ final class TempFileTest extends TestCase
         $this->assertStringStartsWith($this->tmpdir, $file->getPath());
     }
 
-    public function testOpen()
+    public function testOpen(): void
     {
         $file = $this->createTempFile();
         $obj = $file->open();
@@ -65,7 +65,7 @@ final class TempFileTest extends TestCase
         $this->assertSame('foobar', $obj->fgets());
     }
 
-    public function testKeep()
+    public function testKeep(): void
     {
         $newPath = $this->tmpdir . '/important-file';
 
@@ -82,14 +82,15 @@ final class TempFileTest extends TestCase
         $this->assertSame('Hello World!', file_get_contents($newPath));
     }
 
-    public function testCopyTo()
+    public function testCopyTo(): void
     {
         $file = $this->createTempFile();
         $file->open()->fwrite('Hello World!');
 
         $targetStream = fopen('php://memory', 'r+b');
+        $this->assertNotFalse($targetStream);
 
-        $this->assertNull($file->copyTo($targetStream));
+        $file->copyTo($targetStream);
 
         fseek($targetStream, 0);
 
@@ -97,20 +98,33 @@ final class TempFileTest extends TestCase
         $this->assertSame('Hello World!', stream_get_contents($targetStream));
     }
 
-    public function testRelease()
+    public function testCopyToAfterFileHasBeenRemoved(): void
+    {
+        $file = $this->createTempFile();
+        $file->open()->fwrite('Hello World!');
+
+        $targetStream = fopen('php://memory', 'r+b');
+        $this->assertNotFalse($targetStream);
+
+        unlink($file->getPath());
+
+        $file->copyTo($targetStream);
+    }
+
+    public function testRelease(): void
     {
         $file = $this->createTempFile();
         $path = $file->open('r')->getRealPath();
         $this->assertFileExists($path);
 
-        $this->assertNull($file->release());
+        $file->release();
 
         $this->assertFileDoesNotExist($path);
 
-        $this->assertNull($file->release());
+        $file->release();
     }
 
-    private function createTempFile($template = null)
+    private function createTempFile(?string $template = null): TempFile
     {
         return new TempFile($template, $this->tmpdir);
     }

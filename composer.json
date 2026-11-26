@@ -26,7 +26,8 @@
     },
     "scripts": {
         "bc-check": "vendor-bin/bc-check/vendor/bin/roave-backward-compatibility-check",
-        "cs": "vendor-bin/cs/vendor/bin/php-cs-fixer fix"
+        "cs": "vendor-bin/cs/vendor/bin/php-cs-fixer fix",
+        "phpstan": "vendor-bin/phpstan/vendor/bin/phpstan analyse"
     },
     "config": {
         "allow-plugins": {
