@@ -25,6 +25,7 @@
         "phpunit/phpunit": "^9.6"
     },
     "scripts": {
+        "bc-check": "vendor-bin/bc-check/vendor/bin/roave-backward-compatibility-check",
         "cs": "vendor-bin/cs/vendor/bin/php-cs-fixer fix"
     },
     "config": {
