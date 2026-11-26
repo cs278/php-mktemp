@@ -37,6 +37,9 @@ final class PathTemplateFunctionTest extends TestCase
             ['XXX_', 3, '', 'XXX_XXX'],
             ['foo-', 3, '-XX_XX_X_XX_X_XX_XX_X_X_X.tmp', 'foo-XXX-XX_XX_X_XX_X_XX_XX_X_X_X.tmp'],
             ['foo-', 3, '-XX_XX_X_XX_X_XX_XX_X_X_X', 'foo-XXX-XX_XX_X_XX_X_XX_XX_X_X_X'],
+            'internal space' => ['my temp_', 6, '', 'my temp_XXXXXX'],
+            'valid UTF-8 multibyte' => ['tëmp_日本語_', 6, '', 'tëmp_日本語_XXXXXX'],
+            'dots and dashes' => ['app-cache.v1_', 6, '', 'app-cache.v1_XXXXXX']
         ];
     }
 
@@ -69,11 +72,37 @@ final class PathTemplateFunctionTest extends TestCase
             ['X.X.X'],
             ['XX.XX'],
             ['XXxXX'],
+            [' XXXXXXX '],
+            [' XXXXXXX'],
+            ['XXXXXXX '],
             ['../XXXXXX'],
             ['XXXXXX/..'],
             ['XXXXXX/../XXXXXX'],
             ["\0XXXXXX"],
             ["tmp\0.XXXXXX"],
+            ["tmp\n.XXXXXX"],
+
+            // Leading & trailing whitespace
+            'leading space' => [' tmp_XXXXXX'],
+            'trailing space' => ['tmp_XXXXXX '],
+            'leading and trailing spaces' => [' tmp_XXXXXX '],
+            'leading tab' => ["\ttmp_XXXXXX"],
+            'trailing tab' => ["tmp_XXXXXX\t"],
+            'leading newline' => ["\ntmp_XXXXXX"],
+            'trailing newline' => ["tmp_XXXXXX\n"],
+            'trailing CRLF' => ["tmp_XXXXXX\r\n"],
+
+            // Embedded ASCII control characters (C0: 0x00–0x1F and DEL: 0x7F)
+            'null byte' => ["tmp\0_XXXXXX"],
+            'embedded LF' => ["tmp\n.XXXXXX"],
+            'embedded CR' => ["tmp\r.XXXXXX"],
+            'embedded tab' => ["tmp\t_XXXXXX"],
+            'vertical tab' => ["tmp\v_XXXXXX"],
+            'form feed' => ["tmp\f_XXXXXX"],
+            'bell character' => ["tmp\x07_XXXXXX"],
+            'backspace character' => ["tmp\x08_XXXXXX"],
+            'ANSI escape sequence' => ["tmp_\x1B[31mred\x1B[0m_XXXXXX"],
+            'DEL character' => ["tmp\x7F_XXXXXX"],
         ];
     }
 }

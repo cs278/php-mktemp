@@ -90,6 +90,14 @@ function pathTemplate($template)
         throw new \InvalidArgumentException('Template must not contain null bytes');
     }
 
+    if ($template !== trim($template)) {
+        throw new \InvalidArgumentException('Template must not contain leading/trailing whitespace');
+    }
+
+    if (preg_match('{[\x00-\x1F\x7F]}', $template) >= 1) {
+        throw new \InvalidArgumentException('Template must not contain ASCII control characters');
+    }
+
     $len = 0;
     $requiredLen = 3;
 
