@@ -15,9 +15,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         php:
-          - '5.6'
-          - '7.2'
-          - '7.3'
           - '7.4'
           - '8.0'
           - '8.1'
@@ -38,11 +35,26 @@ jobs:
       - name: Install dependencies
         run: |
           composer update
-      - name: Coding Standards
-        run: |
-          composer bin cs update
-          composer cs
-        if: "false"
       - name: PHPUnit
         run: |
-          vendor/bin/simple-phpunit --verbose
+          vendor/bin/phpunit --verbose
+
+  backwards-compatibility-check:
+    name: Backwards Compatibility Check
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Install PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: "8.5"
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          working-directory: vendor-bin/cs
+      - name: Check for BC breaks
+        run: "composer bc-check -- --format=github-actions"

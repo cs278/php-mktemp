@@ -110,7 +110,7 @@ final class TempFile
                 // can fail, this works around that by delaying the unlink until
                 // PHP shuts down.
                 // https://www.php.net/manual/en/function.unlink.php#refsect1-function.unlink-changelog
-               $result = @unlink($this->path);
+                $result = @unlink($this->path);
 
                 if (!$result) {
                     $path = $this->path;

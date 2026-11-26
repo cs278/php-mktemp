@@ -11,7 +11,7 @@ final class TemporaryDirFunctionTest extends TestCase
     {
         $path = Mktemp\temporaryDir();
 
-        $this->assertRegExp('{^tmp\.[A-Za-z0-9]{6}$}', basename($path));
+        $this->assertMatchesRegularExpression('{^tmp\.[A-Za-z0-9]{6}$}', basename($path));
         $this->assertSame(sys_get_temp_dir(), \dirname($path));
 
         $this->assertTrue(is_dir($path));
@@ -29,7 +29,7 @@ final class TemporaryDirFunctionTest extends TestCase
     {
         $path = Mktemp\temporaryDir('someXXXdir.XXX');
 
-        $this->assertRegExp('{^someXXXdir\.[A-Za-z0-9]{3}$}', basename($path));
+        $this->assertMatchesRegularExpression('{^someXXXdir\.[A-Za-z0-9]{3}$}', basename($path));
         $this->assertSame(sys_get_temp_dir(), \dirname($path));
 
         $this->assertTrue(is_dir($path));

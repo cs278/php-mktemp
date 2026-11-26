@@ -4,23 +4,20 @@ namespace Cs278\Mktemp\Tests;
 
 use Cs278\Mktemp;
 use Cs278\Mktemp\TempFile;
-use Cs278\Mktemp\Tests\TestCase\PHPUnitSetUpTearDownTrait;
 use PHPUnit\Framework\TestCase;
 
 final class TempFileTest extends TestCase
 {
-    use PHPUnitSetUpTearDownTrait;
-
     private $tmpdir;
 
-    public function doSetUp()
+    protected function setUp(): void
     {
         $this->tmpdir = Mktemp\temporaryDir();
     }
 
-    public function doTearDown()
+    protected function tearDown(): void
     {
-        foreach (glob($this->tmpdir.'/*') as $file) {
+        foreach (glob($this->tmpdir . '/*') as $file) {
             unlink($file);
         }
 
@@ -45,7 +42,7 @@ final class TempFileTest extends TestCase
 
         $file = null;
 
-        $this->assertFileNotExists($path);
+        $this->assertFileDoesNotExist($path);
     }
 
     public function testGetPath()
@@ -70,9 +67,9 @@ final class TempFileTest extends TestCase
 
     public function testKeep()
     {
-        $newPath = $this->tmpdir.'/important-file';
+        $newPath = $this->tmpdir . '/important-file';
 
-        $this->assertFileNotExists($newPath);
+        $this->assertFileDoesNotExist($newPath);
 
         $file = $this->createTempFile();
         $oldPath = $file->open()->getRealPath();
@@ -80,7 +77,7 @@ final class TempFileTest extends TestCase
 
         $this->assertInstanceOf('\\SplFileInfo', $file->keep($newPath));
 
-        $this->assertFileNotExists($oldPath);
+        $this->assertFileDoesNotExist($oldPath);
         $this->assertFileExists($newPath);
         $this->assertSame('Hello World!', file_get_contents($newPath));
     }
@@ -108,7 +105,7 @@ final class TempFileTest extends TestCase
 
         $this->assertNull($file->release());
 
-        $this->assertFileNotExists($path);
+        $this->assertFileDoesNotExist($path);
 
         $this->assertNull($file->release());
     }

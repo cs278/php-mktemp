@@ -17,24 +17,27 @@
             "Cs278\\Mktemp\\": "src/"
         }
     },
-    "autoload-dev": {
-        "files": [
-            "tests/functional/TestCase/PHPUnitSetUpTearDownTrait.php"
-        ]
-    },
     "require": {
-        "php": "^5.3.3 || ^7 || ^8"
+        "php": "^7.4 || ^8"
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.3.0",
-        "symfony/phpunit-bridge": "5.2.* || ^6.3"
+        "phpunit/phpunit": "^9.6"
     },
     "scripts": {
-        "cs": "php-cs-fixer fix"
+        "bc-check": "vendor-bin/bc-check/vendor/bin/roave-backward-compatibility-check",
+        "cs": "vendor-bin/cs/vendor/bin/php-cs-fixer fix"
     },
     "config": {
         "allow-plugins": {
             "bamarni/composer-bin-plugin": true
+        },
+        "lock": false
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": true
         }
     }
 }

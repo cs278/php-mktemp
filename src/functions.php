@@ -19,11 +19,11 @@ function temporaryFile($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
-    $dir = $dir ? $dir. DIRECTORY_SEPARATOR : '';
+    $dir = $dir ? $dir . DIRECTORY_SEPARATOR : '';
     $attempts = 5;
 
     do {
-        $path = $dir.pathTemplate($template);
+        $path = $dir . pathTemplate($template);
 
         if (false !== $handle = @fopen($path, 'xb')) {
             if ('\\' !== \DIRECTORY_SEPARATOR) {
@@ -54,11 +54,11 @@ function temporaryDir($template = null, $dir = null)
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
-    $dir = $dir ? $dir. DIRECTORY_SEPARATOR : '';
+    $dir = $dir ? $dir . DIRECTORY_SEPARATOR : '';
     $attempts = 5;
 
     do {
-        $path = $dir.pathTemplate($template);
+        $path = $dir . pathTemplate($template);
 
         // umask is applied by PHP
         if (false !== @mkdir($path, 0700)) {
@@ -75,7 +75,6 @@ function temporaryDir($template = null, $dir = null)
 function pathTemplate($template)
 {
     static $alphabet;
-    static $useRandomInt;
 
     if (!$alphabet) {
         $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -127,9 +126,7 @@ function pathTemplate($template)
     $replacement = '';
 
     for ($i = 0; $i < $len; ++$i) {
-        $rand = $useRandomInt
-            ? random_int(0, 61)
-            : mt_rand(0, 61);
+        $rand = random_int(0, 61);
 
         $replacement .= $alphabet[$rand];
     }

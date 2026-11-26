@@ -11,7 +11,7 @@ final class TemporaryFileFunctionTest extends TestCase
     {
         $path = Mktemp\temporaryFile();
 
-        $this->assertRegExp('{^tmp\.[A-Za-z0-9]{6}$}', basename($path));
+        $this->assertMatchesRegularExpression('{^tmp\.[A-Za-z0-9]{6}$}', basename($path));
         $this->assertSame(sys_get_temp_dir(), \dirname($path));
 
         $this->assertTrue(is_file($path));
@@ -26,7 +26,7 @@ final class TemporaryFileFunctionTest extends TestCase
     {
         $path = Mktemp\temporaryFile('outXXXput.XXX.pdf');
 
-        $this->assertRegExp('{^outXXXput\.[A-Za-z0-9]{3}\.pdf$}', basename($path));
+        $this->assertMatchesRegularExpression('{^outXXXput\.[A-Za-z0-9]{3}\.pdf$}', basename($path));
         $this->assertSame(sys_get_temp_dir(), \dirname($path));
 
         $this->assertTrue(is_file($path));

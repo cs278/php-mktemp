@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php": ">= 8.5"
+    },
+    "require-dev": {
+        "roave/backward-compatibility-check": "^8.6"
+    },
+    "config": {
+        "lock": false,
+        "platform": {
+            "php": "8.5.12"
+        }
+    }
+}
