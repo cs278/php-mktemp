@@ -75,7 +75,6 @@ function temporaryDir($template = null, $dir = null)
 function pathTemplate($template)
 {
     static $alphabet;
-    static $useRandomInt;
 
     if (!$alphabet) {
         $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -127,9 +126,7 @@ function pathTemplate($template)
     $replacement = '';
 
     for ($i = 0; $i < $len; ++$i) {
-        $rand = $useRandomInt
-            ? random_int(0, 61)
-            : mt_rand(0, 61);
+        $rand = random_int(0, 61);
 
         $replacement .= $alphabet[$rand];
     }
