@@ -106,7 +106,7 @@ final class TempFile
     public function release(): void
     {
         if (!$this->released) {
-            unlink($this->path);
+            @unlink($this->path);
             $this->released = true;
         }
     }
@@ -127,6 +127,35 @@ final class TempFile
     {
         $this->assertNotReleased();
 
-        return fopen($this->path, $mode);
+        try {
+            return self::throwErrors(fn() => fopen($this->path, $mode));
+        } catch (\Throwable $e) {
+            // var_dump($e);
+            throw $e;
+        }
+    }
+
+
+    /**
+     * @template TReturn
+     * @param \Closure():TReturn $callback
+     *
+     * @return TReturn
+     */
+    private static function throwErrors(\Closure $callback)
+    {
+        \set_error_handler(function (int $code, string $message, ?string $file, ?int $line, array $context) {
+            if ($file !== null && $line !== null) {
+                throw new \ErrorException($message, 0, $code, $file, $line);
+            }
+
+            throw new \ErrorException($message, 0, $code);
+        });
+
+        try {
+            return $callback();
+        } finally {
+            \restore_error_handler();
+        }
     }
 }
