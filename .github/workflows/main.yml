@@ -36,6 +36,28 @@ jobs:
         run: |
           vendor/bin/phpunit --verbose
 
+  phpstan:
+    name: PHPStan (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '8.6'
+      - name: Install library
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+      - name: Install PHPStan
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          working-directory: vendor-bin/phpstan
+      - name: PHPStan
+        run: |
+          composer phpstan -- --error-format=github
+
   backwards-compatibility-check:
     name: Backwards Compatibility Check
     runs-on: ubuntu-latest
