@@ -25,12 +25,18 @@
         "phpunit/phpunit": "^9.6"
     },
     "scripts": {
-        "cs": "php-cs-fixer fix"
+        "cs": "vendor-bin/cs/vendor/bin/php-cs-fixer fix"
     },
     "config": {
         "allow-plugins": {
             "bamarni/composer-bin-plugin": true
         },
         "lock": false
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": true
+        }
     }
 }
