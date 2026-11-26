@@ -35,11 +35,6 @@ jobs:
       - name: Install dependencies
         run: |
           composer update
-      - name: Coding Standards
-        run: |
-          composer bin cs update
-          composer cs
-        if: "false"
       - name: PHPUnit
         run: |
           vendor/bin/simple-phpunit --verbose
