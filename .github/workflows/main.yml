@@ -33,10 +33,8 @@ jobs:
       - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: ${{ matrix.php }}
+          ini-values: zend.assertions=1
       - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - name: Enable assertions
-        run: echo 'zend.assertions=1' | sudo tee /etc/php/${{ matrix.php }}/cli/conf.d/assert.ini >/dev/null
-        if: "runner.os != 'Windows'"
       - name: Install dependencies
         run: |
           composer update
