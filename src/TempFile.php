@@ -10,8 +10,8 @@ namespace Cs278\Mktemp;
  */
 final class TempFile
 {
-    private $path;
-    private $released = false;
+    private string $path;
+    private bool $released = false;
 
     /**
      * @param string|null $template
@@ -118,7 +118,11 @@ final class TempFile
         }
     }
 
-    /** @return resource */
+    /**
+     * @param string $mode
+     *
+     * @return resource
+     */
     private function getStream($mode = 'r')
     {
         $this->assertNotReleased();

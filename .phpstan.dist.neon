@@ -1,0 +1,10 @@
+parameters:
+  paths:
+    - src
+    - tests
+  level: max
+  phpVersion:
+    min: 70400
+    max: 80699
+  treatPhpDocTypesAsCertain: false
+  tmpDir: .phpstan/tmp
