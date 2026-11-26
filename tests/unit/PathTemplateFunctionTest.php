@@ -8,8 +8,15 @@ use function Cs278\Mktemp\pathTemplate;
 
 final class PathTemplateFunctionTest extends TestCase
 {
-    /** @dataProvider dataValid */
-    public function testValid($expectedPrefix, $expectedPlaceholderLength, $expectedSuffix, $input)
+    /**
+     * @dataProvider dataValid
+     *
+     * @param string     $expectedPrefix
+     * @param int<0,max> $expectedPlaceholderLength
+     * @param string     $expectedSuffix
+     * @param string     $input
+     */
+    public function testValid($expectedPrefix, $expectedPlaceholderLength, $expectedSuffix, $input): void
     {
         $output = pathTemplate($input);
 
@@ -23,7 +30,8 @@ final class PathTemplateFunctionTest extends TestCase
         $this->assertMatchesRegularExpression($regex, $output);
     }
 
-    public static function dataValid()
+    /** @return iterable<array-key,array{string,int<0,max>,string,string}> */
+    public static function dataValid(): iterable
     {
         return [
             ['', 3, '', 'XXX'],
@@ -46,7 +54,7 @@ final class PathTemplateFunctionTest extends TestCase
     /**
      * @medium
      */
-    public function testSlow()
+    public function testSlow(): void
     {
         $result = pathTemplate('XXX' . \str_repeat('aXX', 1024 * 1024 * 100));
 
@@ -54,15 +62,20 @@ final class PathTemplateFunctionTest extends TestCase
         $this->assertMatchesRegularExpression('{^[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}a}', $result);
     }
 
-    /** @dataProvider dataInvalid */
-    public function testInvalid($input)
+    /**
+     * @dataProvider dataInvalid
+     *
+     * @param string $input
+     */
+    public function testInvalid($input): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         pathTemplate($input);
     }
 
-    public static function dataInvalid()
+    /** @return iterable<array-key,array{string}> */
+    public static function dataInvalid(): iterable
     {
         return [
             [''],
