@@ -20,7 +20,7 @@ final class PathTemplateFunctionTest extends TestCase
             preg_quote($expectedSuffix)
         );
 
-        $this->assertRegExp($regex, $output);
+        $this->assertMatchesRegularExpression($regex, $output);
     }
 
     public static function dataValid()
@@ -51,7 +51,7 @@ final class PathTemplateFunctionTest extends TestCase
         $result = pathTemplate('XXX'.\str_repeat('aXX', 1024 * 1024 * 100));
 
         $this->assertEquals(1024 * 1024 * 100 * 3 + 3, strlen($result));
-        $this->assertRegExp('{^[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}a}', $result);
+        $this->assertMatchesRegularExpression('{^[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}a}', $result);
     }
 
     /** @dataProvider dataInvalid */

@@ -42,7 +42,7 @@ final class TempFileTest extends TestCase
 
         $file = null;
 
-        $this->assertFileNotExists($path);
+        $this->assertFileDoesNotExist($path);
     }
 
     public function testGetPath()
@@ -69,7 +69,7 @@ final class TempFileTest extends TestCase
     {
         $newPath = $this->tmpdir.'/important-file';
 
-        $this->assertFileNotExists($newPath);
+        $this->assertFileDoesNotExist($newPath);
 
         $file = $this->createTempFile();
         $oldPath = $file->open()->getRealPath();
@@ -77,7 +77,7 @@ final class TempFileTest extends TestCase
 
         $this->assertInstanceOf('\\SplFileInfo', $file->keep($newPath));
 
-        $this->assertFileNotExists($oldPath);
+        $this->assertFileDoesNotExist($oldPath);
         $this->assertFileExists($newPath);
         $this->assertSame('Hello World!', file_get_contents($newPath));
     }
@@ -105,7 +105,7 @@ final class TempFileTest extends TestCase
 
         $this->assertNull($file->release());
 
-        $this->assertFileNotExists($path);
+        $this->assertFileDoesNotExist($path);
 
         $this->assertNull($file->release());
     }
