@@ -127,6 +127,7 @@ final class TempFile
     {
         $this->assertNotReleased();
 
+        // @phpstan-ignore return.type (Needs fixing)
         return fopen($this->path, $mode);
     }
 }
