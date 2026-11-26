@@ -63,10 +63,15 @@ final class PathTemplateFunctionTest extends TestCase
     {
         return [
             [''],
+            ['.'],
+            ['..'],
             ['xxx'],
             ['X.X.X'],
             ['XX.XX'],
             ['XXxXX'],
+            ['../XXXXXX'],
+            ['XXXXXX/..'],
+            ['XXXXXX/../XXXXXX'],
             ["\0XXXXXX"],
             ["tmp\0.XXXXXX"],
         ];
