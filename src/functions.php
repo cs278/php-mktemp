@@ -15,7 +15,7 @@ use Cs278\Mktemp\Exception\CreateFailedException;
  *
  * @return string Path to temporary file
  */
-function temporaryFile($template = null, $dir = null)
+function temporaryFile($template = null, $dir = null): string
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
@@ -50,7 +50,7 @@ function temporaryFile($template = null, $dir = null)
  *
  * @return string Path to temporary directory
  */
-function temporaryDir($template = null, $dir = null)
+function temporaryDir($template = null, $dir = null): string
 {
     $template = $template ?: 'tmp.XXXXXX';
     $dir = $dir !== null ? $dir : sys_get_temp_dir();
@@ -72,7 +72,7 @@ function temporaryDir($template = null, $dir = null)
 /**
  * @internal
  */
-function pathTemplate($template)
+function pathTemplate($template): string
 {
     static $alphabet;
 

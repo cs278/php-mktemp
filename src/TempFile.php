@@ -13,6 +13,10 @@ final class TempFile
     private $path;
     private $released = false;
 
+    /**
+     * @param string|null $template
+     * @param string|null $dir
+     */
     public function __construct($template = null, $dir = null)
     {
         $this->path = temporaryFile($template, $dir);
@@ -30,7 +34,7 @@ final class TempFile
      *
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         $this->assertNotReleased();
 
@@ -44,7 +48,7 @@ final class TempFile
      *
      * @return \SplFileObject
      */
-    public function open($mode = 'r+')
+    public function open($mode = 'r+'): \SplFileObject
     {
         $this->assertNotReleased();
 
@@ -60,7 +64,7 @@ final class TempFile
      *
      * @return \SplFileInfo Represents the new file.
      */
-    public function keep($newPath)
+    public function keep($newPath): \SplFileInfo
     {
         $this->assertNotReleased();
 
@@ -87,7 +91,7 @@ final class TempFile
      *
      * @return void
      */
-    public function copyTo($stream)
+    public function copyTo($stream): void
     {
         $this->assertNotReleased();
 
@@ -99,7 +103,7 @@ final class TempFile
      *
      * @return void
      */
-    public function release()
+    public function release(): void
     {
         if (!$this->released) {
             if (\PHP_VERSION_ID < 70300 && \DIRECTORY_SEPARATOR === '\\') {
@@ -126,13 +130,14 @@ final class TempFile
         }
     }
 
-    private function assertNotReleased()
+    private function assertNotReleased(): void
     {
         if ($this->released) {
             throw new \RuntimeException();
         }
     }
 
+    /** @return resource */
     private function getStream($mode = 'r')
     {
         $this->assertNotReleased();

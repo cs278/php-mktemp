@@ -4,7 +4,8 @@ namespace Cs278\Mktemp\Exception;
 
 final class CreateFailedException extends \RuntimeException
 {
-    public static function failedFile($dir)
+    /** @param string $dir */
+    public static function failedFile($dir): self
     {
         $dir = $dir
             ? rtrim($dir, DIRECTORY_SEPARATOR)
@@ -16,7 +17,8 @@ final class CreateFailedException extends \RuntimeException
         ));
     }
 
-    public static function failedDir($dir)
+    /** @param string $dir */
+    public static function failedDir($dir): self
     {
         $dir = $dir
             ? rtrim($dir, DIRECTORY_SEPARATOR)
