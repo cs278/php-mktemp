@@ -86,6 +86,10 @@ function pathTemplate($template)
         throw new \InvalidArgumentException('Template must not contain back or forward slashes');
     }
 
+    if (false !== strpos($template, "\0")) {
+        throw new \InvalidArgumentException('Template must not contain null bytes');
+    }
+
     $len = 0;
     $requiredLen = 3;
 
