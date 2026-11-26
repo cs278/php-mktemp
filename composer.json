@@ -17,11 +17,6 @@
             "Cs278\\Mktemp\\": "src/"
         }
     },
-    "autoload-dev": {
-        "files": [
-            "tests/functional/TestCase/PHPUnitSetUpTearDownTrait.php"
-        ]
-    },
     "require": {
         "php": "^7.4 || ^8"
     },

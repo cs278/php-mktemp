@@ -4,21 +4,18 @@ namespace Cs278\Mktemp\Tests;
 
 use Cs278\Mktemp;
 use Cs278\Mktemp\TempFile;
-use Cs278\Mktemp\Tests\TestCase\PHPUnitSetUpTearDownTrait;
 use PHPUnit\Framework\TestCase;
 
 final class TempFileTest extends TestCase
 {
-    use PHPUnitSetUpTearDownTrait;
-
     private $tmpdir;
 
-    public function doSetUp()
+    protected function setUp(): void
     {
         $this->tmpdir = Mktemp\temporaryDir();
     }
 
-    public function doTearDown()
+    protected function tearDown(): void
     {
         foreach (glob($this->tmpdir.'/*') as $file) {
             unlink($file);
