@@ -1,11 +1,14 @@
 {
     "require": {
-        "php": "^7 || ^8"
+        "php": "^7.4 || ^8"
     },
     "require-dev": {
-        "cs278/coding-standard": "^2"
+        "friendsofphp/php-cs-fixer": "^3"
     },
     "config": {
-        "lock": false
+        "lock": false,
+        "platform": {
+            "php": "7.4.33"
+        }
     }
 }
