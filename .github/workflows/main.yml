@@ -84,6 +84,6 @@ jobs:
           composer-options: "--no-plugins"
       - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
         with:
-          working-directory: vendor-bin/cs
+          working-directory: vendor-bin/bc-check
       - name: Check for BC breaks
         run: "composer bc-check -- --format=github-actions"
